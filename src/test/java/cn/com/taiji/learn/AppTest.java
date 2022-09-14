@@ -6,16 +6,21 @@ package cn.com.taiji.learn;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
     @Test void arryInitTest()  {
-        String source = "{1,2,3}";
+        String source = "{1,2,3, 0, 5, 66}";
         antlr.taiji.ArrayInitLexer lexer = new antlr.taiji.ArrayInitLexer(CharStreams.fromString(source)); // create a buffer of tokens pulled from the lexer
         CommonTokenStream tokens = new CommonTokenStream(lexer); // create a parser that feeds off the tokens buffer
         antlr.taiji.ArrayInitParser parser = new antlr.taiji.ArrayInitParser(tokens);
         ParseTree tree = parser.init(); // begin parsing at init rule
-        System.out.println(tree.toStringTree(parser));
+        //System.out.println(tree.toStringTree(parser));
+        ParseTreeWalker walker = new ParseTreeWalker();
+        ShortToUnicodeString stus = new ShortToUnicodeString();
+        walker.walk((ParseTreeListener) stus, tree);
+        System.out.println((int)stus.getResult().charAt(3));
     }
 }
