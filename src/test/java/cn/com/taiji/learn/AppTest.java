@@ -3,6 +3,8 @@
  */
 package cn.com.taiji.learn;
 
+import antlr.taiji.ExprLexer;
+import antlr.taiji.ExprParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -11,7 +13,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.jupiter.api.Test;
 
 class AppTest {
-    @Test void arryInitTest()  {
+    @Test void arrayInitTest()  {
         String source = "{1,2,3, 0, 5, 66}";
         antlr.taiji.ArrayInitLexer lexer = new antlr.taiji.ArrayInitLexer(CharStreams.fromString(source)); // create a buffer of tokens pulled from the lexer
         CommonTokenStream tokens = new CommonTokenStream(lexer); // create a parser that feeds off the tokens buffer
@@ -22,5 +24,16 @@ class AppTest {
         ShortToUnicodeString stus = new ShortToUnicodeString();
         walker.walk((ParseTreeListener) stus, tree);
         System.out.println((int)stus.getResult().charAt(3));
+    }
+
+    @Test void exprTest() {
+        String source = "x = 3\n y=4 \n x+y \n";
+        antlr.taiji.ExprLexer lexer = new ExprLexer(CharStreams.fromString(source));
+        CommonTokenStream tokens = new CommonTokenStream(lexer); // create a parser that feeds off the tokens buffer
+        antlr.taiji.ExprParser parser = new ExprParser(tokens);
+        ParseTree tree = parser.prog();
+        System.out.println(tree.toStringTree(parser));
+        EvalVisitor visitor = new EvalVisitor();
+        visitor.visit(tree);
     }
 }
