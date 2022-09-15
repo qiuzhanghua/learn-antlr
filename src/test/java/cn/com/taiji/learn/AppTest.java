@@ -4,6 +4,8 @@
 package cn.com.taiji.learn;
 
 
+import antlr.taiji.*;
+import antlr.taiji.*;
 import antlr.taiji.DataLexer;
 import antlr.taiji.ExprLexer;
 import antlr.taiji.ExprParser;
@@ -68,5 +70,14 @@ class AppTest {
             String s = tree.getChild(i).getChild(1).getText();
             System.out.printf("%d -> [%s]\n", i, s);
         }
+    }
+
+    @Test void beijingCodeTest() {
+        String source = "BJIDA001X002\u0003345\u0003532WWW";
+        antlr.taiji.BeijingCodeLexer lexer = new antlr.taiji.BeijingCodeLexer(CharStreams.fromString(source));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        antlr.taiji.BeijingCodeParser parser = new antlr.taiji.BeijingCodeParser(tokens);
+        ParseTree tree = parser.init();
+        System.out.println(tree.toStringTree(parser));
     }
 }
