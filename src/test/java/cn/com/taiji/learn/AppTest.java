@@ -73,7 +73,7 @@ class AppTest {
     }
 
     @Test void beijingCodeTest() {
-        String source = "BJIDA001X002\u0003345\u0003532WWW";
+        String source = "BJIDA001X002A1\u000234\u0003532tttteeee1\u0003SIG";
         antlr.taiji.BeijingCodeLexer lexer = new antlr.taiji.BeijingCodeLexer(CharStreams.fromString(source));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         antlr.taiji.BeijingCodeParser parser = new antlr.taiji.BeijingCodeParser(tokens);
