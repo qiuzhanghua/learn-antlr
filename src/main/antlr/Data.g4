@@ -7,12 +7,13 @@ import java.util.HashSet;
 }
 
 file  : group+;
-group : INT sequence[$INT.int];
+group : CHAR sequence[$CHAR.text.charAt(0)];
 
 sequence[int n]
-locals [int i = 1;]
-      : ( {$i<=$n}? INT {$i++;} ) *
+locals [int i = 0]
+      : ( {$i<$n}? CHAR {$i++;} ) *
       ;
 
-INT: [0-9];
-WS: [ \t\r\n]+ -> skip;
+CHAR: .;
+
+//WS: [ \t\r\n]+ -> skip;

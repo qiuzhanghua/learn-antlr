@@ -56,11 +56,17 @@ class AppTest {
     }
 
     @Test void dataTest() {
-        String source = "2343531";
+        String source = "\u000234\u0003531\u0000\u0001Q";
         antlr.taiji.DataLexer lexer = new DataLexer(CharStreams.fromString(source));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         antlr.taiji.DataParser parser = new antlr.taiji.DataParser(tokens);
         ParseTree tree = parser.file();
         System.out.println(tree.toStringTree(parser));
+        DataVisitor visitor = new DataVisitor();
+        visitor.visit(tree);
+        for (int i = 0; i < tree.getChildCount(); i++) {
+            String s = tree.getChild(i).getChild(1).getText();
+            System.out.printf("%d -> [%s]\n", i, s);
+        }
     }
 }
