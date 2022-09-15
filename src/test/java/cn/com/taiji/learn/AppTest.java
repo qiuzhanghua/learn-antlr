@@ -3,6 +3,8 @@
  */
 package cn.com.taiji.learn;
 
+
+import antlr.taiji.DataLexer;
 import antlr.taiji.ExprLexer;
 import antlr.taiji.ExprParser;
 import antlr.taiji.RowsParser;
@@ -30,7 +32,7 @@ class AppTest {
     @Test void exprTest() {
         String source = "x = 3\n y=4 \n x+y \n";
         antlr.taiji.ExprLexer lexer = new ExprLexer(CharStreams.fromString(source));
-        CommonTokenStream tokens = new CommonTokenStream(lexer); // create a parser that feeds off the tokens buffer
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
         antlr.taiji.ExprParser parser = new ExprParser(tokens);
         ParseTree tree = parser.prog();
         System.out.println(tree.toStringTree(parser));
@@ -45,11 +47,20 @@ class AppTest {
                 bke\tKevin Edgar\t008
                 """;
         antlr.taiji.RowsLexer lexer = new antlr.taiji.RowsLexer(CharStreams.fromString(source));
-        CommonTokenStream tokens = new CommonTokenStream(lexer); // create a parser that feeds off the tokens buffer
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
         int col = 2;
         antlr.taiji.RowsParser parser = new RowsParser(tokens, col);
         parser.setBuildParseTree(false);
         parser.file();
         System.out.println(parser.getResult());
+    }
+
+    @Test void dataTest() {
+        String source = "2343531";
+        antlr.taiji.DataLexer lexer = new DataLexer(CharStreams.fromString(source));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        antlr.taiji.DataParser parser = new antlr.taiji.DataParser(tokens);
+        ParseTree tree = parser.file();
+        System.out.println(tree.toStringTree(parser));
     }
 }
