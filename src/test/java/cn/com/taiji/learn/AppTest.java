@@ -5,6 +5,7 @@ package cn.com.taiji.learn;
 
 import antlr.taiji.ExprLexer;
 import antlr.taiji.ExprParser;
+import antlr.taiji.RowsParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -35,5 +36,20 @@ class AppTest {
         System.out.println(tree.toStringTree(parser));
         EvalVisitor visitor = new EvalVisitor();
         visitor.visit(tree);
+    }
+
+    @Test void rowTest() {
+        String source = """
+                parrr\tTerence Parr\t101
+                tombu\tTom Burns\t020
+                bke\tKevin Edgar\t008
+                """;
+        antlr.taiji.RowsLexer lexer = new antlr.taiji.RowsLexer(CharStreams.fromString(source));
+        CommonTokenStream tokens = new CommonTokenStream(lexer); // create a parser that feeds off the tokens buffer
+        int col = 2;
+        antlr.taiji.RowsParser parser = new RowsParser(tokens, col);
+        parser.setBuildParseTree(false);
+        parser.file();
+        System.out.println(parser.getResult());
     }
 }
