@@ -6,13 +6,13 @@ plugins {
 repositories {
     mavenCentral()
 }
+version = "0.1.0"
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
     implementation("com.google.guava:guava:31.1-jre")
     implementation("org.apache.commons:commons-lang3:3.12.0")
     implementation("commons-io:commons-io:2.11.0")
-//    implementation("org.apache.commons:commons-csv:1.9.0")
     antlr("org.antlr:antlr4:4.11.1")
     implementation("org.antlr:stringtemplate:4.0.2")
 }
