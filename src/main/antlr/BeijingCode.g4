@@ -10,7 +10,7 @@ init : 'BJID'                   // 固定
         attr=seq[2]             // 类型
         id=ps                   // 长度+身份标识
         name=ps                 // 扩展域样例，长度+姓名，对于加密，应该是这两个字段合一后加密
-//        sec=ps                  // (id + name)加密后的Pascal类型的字符串
+//        sec=ps                  // (id + name + ts + exp + ...)加密后的Pascal类型的字符串
 //        skey=ps                 // 长度+秘钥编号
         ts=seq[4]               // 时间戳
         exp=seq[4]              // 过期时长

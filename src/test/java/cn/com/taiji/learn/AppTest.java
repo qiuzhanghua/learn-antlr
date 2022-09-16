@@ -3,9 +3,6 @@
  */
 package cn.com.taiji.learn;
 
-
-import antlr.taiji.*;
-import antlr.taiji.*;
 import antlr.taiji.DataLexer;
 import antlr.taiji.ExprLexer;
 import antlr.taiji.ExprParser;
@@ -78,6 +75,20 @@ class AppTest {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         antlr.taiji.BeijingCodeParser parser = new antlr.taiji.BeijingCodeParser(tokens);
         ParseTree tree = parser.init();
-        System.out.println(tree.toStringTree(parser));
+        BeijingCodeVisitor visitor = new BeijingCodeVisitor();
+        visitor.visit(tree);
+//        for (int i = 0; i < tree.getChildCount(); i++) {
+//            ParseTree t = tree.getChild(i);
+//            String s = t.getText();
+//            if (t instanceof antlr.taiji.BeijingCodeParser.PsContext) {
+//                s = s.substring(1);
+//            }
+//            System.out.printf("%d -> [%s]\n", i, s);
+//        }
+        antlr.taiji.BeijingCodeParser.InitContext init = (antlr.taiji.BeijingCodeParser.InitContext) tree;
+        System.out.println(init.chan.getText());
+        System.out.println(init.id.getText().substring(1));
+        System.out.println(init.name.getText().substring(1));
+        System.out.println(init.manner.getText());
     }
 }
