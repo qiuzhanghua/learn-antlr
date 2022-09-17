@@ -6,7 +6,9 @@ plugins {
 repositories {
     mavenCentral()
 }
-version = "0.1.1-SNAPSHOT"
+version = "0.1.1"
+
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
@@ -26,12 +28,13 @@ dependencies {
 //}
 
 application {
-    mainClass.set("cn.com.taiji.App")
+    mainClass.set("cn.com.taiji.learn.App")
 }
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
 }
+
 
 tasks.generateGrammarSource {
     maxHeapSize = "512m"
