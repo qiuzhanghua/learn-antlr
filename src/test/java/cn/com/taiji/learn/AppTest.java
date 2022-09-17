@@ -75,6 +75,7 @@ class AppTest {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         antlr.taiji.BeijingCodeParser parser = new antlr.taiji.BeijingCodeParser(tokens);
         ParseTree tree = parser.init();
+        parser.setBuildParseTree(false);
         BeijingCodeVisitor visitor = new BeijingCodeVisitor();
         visitor.visit(tree);
 //        for (int i = 0; i < tree.getChildCount(); i++) {
