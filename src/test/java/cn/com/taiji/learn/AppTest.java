@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.jupiter.api.Test;
+import org.stringtemplate.v4.ST;
 
 class AppTest {
     @Test void arrayInitTest()  {
@@ -91,5 +92,12 @@ class AppTest {
         System.out.println(init.id.getText().substring(1));
         System.out.println(init.name.getText().substring(1));
         System.out.println(init.manner.getText());
+    }
+
+    @Test
+    public void stringTemplate01Test() {
+        ST hello = new ST("Hello, <name>");
+        hello.add("name", "World");
+        System.out.println(hello.render());
     }
 }

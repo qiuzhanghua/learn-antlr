@@ -16,16 +16,8 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.12.0")
     implementation("commons-io:commons-io:2.11.0")
     antlr("org.antlr:antlr4:4.11.1")
-    implementation("org.antlr:stringtemplate:4.0.2")
+    implementation("org.antlr:ST4:4.3.4")
 }
-
-//sourceSets{
-//    antlr {
-//        java {
-//            srcDirs("build/generated-src/antlr")
-//        }
-//    }
-//}
 
 application {
     mainClass.set("cn.com.taiji.learn.App")
